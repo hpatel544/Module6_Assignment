@@ -45,6 +45,16 @@ var targetX = 0;
 var targetY = 0;
 var targetLength = 25;
 
+var bonusX = 0;
+var bonusY = 0;
+var bonusLength = 25;
+
+// Properties for obstacles
+var obstacleX = 0;
+var obstacleY = 0;
+var obstacleWidth = 100;
+var obstacleHeight = 20;
+
 // Determine if number a is within the range b to c (exclusive)
 function isWithin(a, b, c) {
   return (a > b && a < c);
@@ -106,6 +116,19 @@ function menu() {
   canvas.addEventListener('click', startGame);
 }
 
+
+// Move the time bonus to a random position
+function moveBonus() {
+  bonusX = Math.round(Math.random() * (canvas.width - bonusLength));
+  bonusY = Math.round(Math.random() * (canvas.height - bonusLength));
+}
+
+// Move the obstacle to a random position
+function moveObstacle() {
+  obstacleX = Math.round(Math.random() * (canvas.width - obstacleWidth));
+  obstacleY = Math.round(Math.random() * (canvas.height - obstacleHeight));
+}
+
 // Start the game
 function startGame() {
 	// Reduce the countdown timer ever second
@@ -114,6 +137,9 @@ function startGame() {
   }, 1000)
   // Stop listening for click events
   canvas.removeEventListener('click', startGame);
+
+  moveBonus();
+  moveObstacle();
   // Put the target at a random starting point
 	moveTarget();
   // Kick off the draw loop
@@ -173,6 +199,30 @@ function draw() {
   if (x + sideLength > canvas.width) {
     x = canvas.width - sideLength;
   }
+  // Collide with the bonus
+  if (
+    isWithin(bonusX, x, x + sideLength) || isWithin(bonusX + bonusLength, x, x + sideLength)
+  ) { // X
+    if (isWithin(bonusY, y, y + sideLength) || isWithin(bonusY + bonusLength, y, y + sideLength)) { // Y
+      // Respawn the bonus
+      moveBonus();
+      // Increase the score and time
+      score++;
+      countdown += 5;
+    }
+  }
+  // Collide with the obstacle
+  if (
+    isWithin(obstacleX, x, x + sideLength) || isWithin(obstacleX + obstacleWidth, x, x + sideLength)
+  ) { // X
+    if (isWithin(obstacleY, y, y + sideLength) || isWithin(obstacleY + obstacleHeight, y, y + sideLength)) { // Y
+      // Respawn the obstacle
+      moveObstacle();
+      // Decrease the score and time
+      score--;
+      countdown -= 5;
+    }
+  }
   // Collide with the target
   if (isWithin(targetX, x, x + sideLength) || isWithin(targetX + targetLength, x, x + sideLength)) { // X
     if (isWithin(targetY, y, y + sideLength) || isWithin(targetY + targetLength, y, y + sideLength)) { // Y
@@ -194,6 +244,15 @@ function draw() {
   context.textAlign = 'left';
   context.fillText('Score: ' + score, 10, 24);
   context.fillText('Time Remaining: ' + countdown, 10, 50);
+
+   // Draw the bonus
+   context.fillStyle = '#FFFF00';
+  context.fillRect(bonusX, bonusY, bonusLength, bonusLength);
+
+  // Draw the obstacle
+  context.fillStyle = '#0000FF';
+  context.fillRect(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
+
   // End the game or keep playing
   if (countdown <= 0) {
     endGame();
