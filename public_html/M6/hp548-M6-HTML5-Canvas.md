@@ -7,7 +7,7 @@
 <tr><td><table><tr><td> <em>Sub-Task 1: </em> What game did you pick to edit/modify?</td></tr>
 <tr><td> <em>Response:</em> <p>I have choose the Collect the Squares game for this assignment because it&#39;s<br>easy and fun to play. So, it caught my attention to further improve<br>this game.<br></p><br></td></tr>
 <tr><td> <em>Sub-Task 2: </em> Add the direct link to the html5.html file from Heroku Prod (i.e., https://mt85-prod.herokuapp.com/M6/html5.html)</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://appp3-aa70a3e4e8f5.herokuapp.com/html5.html"> https://hp548-appp3-f02b0e461144.herokuapp.com/html5.html </a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://appp3-aa70a3e4e8f5.herokuapp.com"> https://hp548-appp3-f02b0e461144.herokuapp.com </a> </td></tr>
 <tr><td> <em>Sub-Task 3: </em> Add the pull request link for this assignment from M6-HTML5-Canvas to dev</td></tr>
 <tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/hpatel544/Module6_Assignment/pull/1">https://github.com/hpatel544/Module6_Assignment/pull/1</a> </td></tr>
 </table></td></tr>
